@@ -1,0 +1,104 @@
+.head{
+  width: 100%;
+  height: 80px;
+  margin-bottom: 30px;
+  background: #191c26;
+  color: #fff;
+  @media all and (max-width: 1000px){
+    padding: 0 10px;
+    height: 55px;
+  }
+  .container{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__logo{
+    display: flex;
+    align-items: center;
+    img{
+      width: 140px;
+      @media all and (min-width: 1000px){
+        width: 200px;
+      }
+    }
+    &__home_button{
+      margin-top: 5px;
+      width: 140px;
+      height: 25px;
+    }
+    &__skins_logo{
+      width: 140px;
+      height: 47px;
+    }
+  }
+
+  &__faq{
+    cursor: pointer;
+    background: transparent;
+    margin: 0 5px;
+    padding: 0 10px;
+    line-height: 36px;
+    height: 42px !important;
+    border: 2px solid #292d35;
+    transition: all 0.3s ease;
+    &:hover{
+      background: #131313;
+    }
+  }
+  &__menu{
+    display: flex;
+    height: 100%;
+    width: calc(100% - 140px);
+    align-items: center;
+    justify-content: flex-end;
+    @media all and (min-width: 1000px){
+      width: calc(100% - 200px);
+    }
+    >div{
+      display: flex;
+      height: 100%;
+      align-items: center;
+    }
+  }
+  &__depoId{
+    font-size: 12px;
+    @media all and (min-width: 1000px){
+      font-size: 14px;
+    }
+    @media screen and (max-width: 380px){
+      display: none;
+    }
+  }
+  &__steam{
+    width: 260px;
+    &--error{
+      border-color: #c9302c;
+    }
+    &__circle{
+      margin:0 7px 0 15px;
+      border-radius: 50%;
+      width: 10px;
+      height: 10px;
+      @media screen and (max-width: 500px){
+        margin: 0px;
+      }
+    }
+    @media screen and (max-width: 500px){
+      display: none;
+    }
+  }
+
+}
+.circle__delayed{
+  background-color: #00a7d0;
+}
+
+.circle__normal{
+  background-color: #00a65a;
+}
+
+.circle__critical{
+  background-color: #cc0000;
+}

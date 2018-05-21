@@ -1,0 +1,79 @@
+*, *:before, *:after{
+  box-sizing: border-box;
+}
+body.first, html{
+  @media all and (min-width: 1000px){
+    height: 100%;
+  }
+}
+body{
+  background: #0c0e15;
+  font-family: 'AvenirNextCyr'; 
+}
+input{
+  font-family: 'AvenirNextCyr'; 
+}
+
+.container{
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  &.oneColl{
+    background: #21232a;
+    color: #fff;
+    padding: 20px;
+    @media all and (min-width: 1000px){
+      padding: 40px;
+    }
+    h2{
+      font-size: 18px;
+      text-transform: uppercase;
+      line-height: 20px;
+      margin-bottom: 10px;
+    }
+    a{
+      color: #edb140;
+    }
+    p{
+      font-size: 12px;
+      line-height: 22px;
+      @media all and (min-width: 1000px){
+        font-size: 16px;
+        line-height: 26px;
+      }
+      &.zag{
+        font-size: 16px;
+        @media all and (min-width: 1000px){
+          font-size: 21px;
+        }
+      }
+    }
+  }
+}
+
+.skinsForm{
+  display: none;
+}
+
+.hide{
+  display: none !important;
+  @media all and (max-width: 1000px){
+    &-mb{
+      display: none !important;
+    }
+  }
+  @media all and (min-width: 1000px){
+    &-ds{
+      display: none !important;
+    }
+  }
+}
+
+.c{
+  &--gray{
+    color: #676e81;
+  }
+  &--white{
+    color: #fff;
+  }
+}

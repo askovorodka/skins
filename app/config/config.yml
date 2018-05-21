@@ -1,0 +1,271 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: ru
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection:
+        enabled: true
+    validation:      { enable_annotations: true }
+    serializer:
+        enabled: true
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  snc_redis.session.handler
+        cookie_lifetime: 0
+    cache:
+        app: cache.adapter.redis
+        default_redis_provider: '%redis_dsn_default%'
+    fragments:       ~
+    http_method_override: true
+    assets:
+        version: 'v1.026'
+
+# Twig Configuration
+twig:
+    debug:            true
+    strict_variables: "%kernel.debug%"
+    cache:  false
+#    form:
+#        resources:
+#            - 'SonataCoreBundle:Form:datepicker.html.twig'
+    globals:
+        inception_inscription:  '%crsf_inscription_inception%'
+
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #     path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        dql:
+            string_functions:
+                DATE_FORMAT: DoctrineExtensions\Query\Mysql\DateFormat
+                ROUND: DoctrineExtensions\Query\Mysql\Round
+                JSON_KEYS: Syslogic\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonKeys
+                JSON_LENGTH: Syslogic\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonLength
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
+    host:      smtp.gmail.com
+    auth_mode:         login
+    encryption:        tls
+    #spool:
+    #    type: service
+    #    id: snc_redis.swiftmailer.spool
+
+snc_redis:
+    clients:
+        default:
+            type: predis
+            alias: default
+            dsn: %redis_dsn_default%
+            logging: false
+        profiler_storage:
+            type: predis
+            alias: profiler_storage
+            dsn: %redis_dsn_default%
+            logging: false
+        cache:
+            type: predis
+            alias: cache
+            dsn: %redis_dsn_default%
+            logging: false
+        session:
+            type: predis
+            alias: session
+            dsn: %redis_dsn_default%
+            logging: false
+    session:
+        client: session
+        prefix: S4R
+    swiftmailer:
+        client: default
+        key: swiftmailer
+    doctrine:
+        metadata_cache:
+            client: cache
+            entity_manager: default
+            document_manager: default
+        result_cache:
+            client: cache
+            entity_manager: [default]
+        query_cache:
+            client: cache
+            entity_manager: default
+        second_level_cache:
+            client: cache
+            entity_manager: default
+    profiler_storage:
+        client: profiler_storage
+        ttl: 3600
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+        # ...
+#sonata_admin:
+#    templates:
+#        layout: :admin:standard_layout.html.twig
+
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: AppBundle\Entity\User
+    from_email:
+        address:        noreply@skins4real.com
+        sender_name:    Skins4Real
+
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
+
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     "%rabbitmq_host%"
+            port:     "%rabbitmq_port%"
+            user:     "%rabbitmq_user%"
+            password: "%rabbitmq_password%"
+            vhost:    "%rabbitmq_vhost%"
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+
+            # requires php-amqplib v2.4.1+ and PHP5.4+
+            keepalive: false
+
+            # requires php-amqplib v2.4.1+
+            heartbeat: 0
+
+            #requires php_sockets.dll
+            use_socket: false # default false
+
+    producers:
+        pushback:
+            connection: default
+            exchange_options: {name: 'pushback', type: topic}
+            queue_options:
+                name: "pushback.retry"
+                arguments: {'x-message-ttl': ['I', 10000], 'x-dead-letter-exchange': ['S', 'pushback'], 'x-dead-letter-routing-key': ['S','pushback']}
+                routing_keys:
+                    - 'pushback.retry'
+                durable: true
+
+        depositstatistics:
+            connection: default
+            exchange_options: {name: 'deposit_statistics', type: direct}
+            queue_options:
+                name: "deposit_statistics"
+                routing_keys:
+                    - 'deposit_statistics'
+                durable: true
+                #auto_delete: false
+
+
+    consumers:
+        pushback:
+            connection: default
+            exchange_options: {name: 'pushback', type: topic}
+            queue_options:
+                name: 'pushback'
+                arguments: {'x-dead-letter-exchange': ['S', 'pushback'], 'x-dead-letter-routing-key': ['S','pushback.retry']}
+                routing_keys:
+                    - 'pushback'
+                durable: true
+            callback: pushback_consumer
+
+        depositstatistics:
+            connection:       default
+            exchange_options: {name: 'deposit_statistics', type: direct, auto_delete: false, durable: true}
+            queue_options:    {name: 'deposit_statistics', auto_delete: false}
+            callback:         deposit_statistics_consumer
+
+
+nexy_slack:
+    # The Slack API Incoming WebHooks URL.
+    endpoint:             '%slack_token%' # Required
+    username:             Skins4Real
+    icon:                 https://pp.vk.me/c627127/v627127061/3c/EbkDQ2vFGw4.jpg
+
+lexik_jwt_authentication:
+    private_key_path: '%jwt_private_key_path%'
+    public_key_path:  '%jwt_public_key_path%'
+    pass_phrase:      '%jwt_key_pass_phrase%'
+    token_ttl:        '%jwt_token_ttl%'
+
+nelmio_cors:
+    defaults:
+        allow_credentials: false
+        allow_origin: []
+        allow_headers: []
+        allow_methods: []
+        expose_headers: []
+        max_age: 0
+        hosts: []
+        origin_regex: false
+        forced_allow_origin_value: ~
+    paths:
+        '^/dashboard/api/v1/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'GET']
+            max_age: 3600
+        '^/token_auth':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'GET']
+            max_age: 3600
+        '^/(ru|en)/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'GET']
+            max_age: 3600
+        '^/':
+            allow_origin: ['*']
+            allow_headers: ['*']
+            allow_methods: ['POST', 'GET']
+            max_age: 3600
+cl_slack:
+  api_token: "%slack_api_token%"

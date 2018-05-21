@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container oneColl">
+    <p class="zag">{{ error_message|trans }}</p><br>
+    <div class="animLine">
+        <span></span>
+    </div>
+    {% if redirect_url is defined %}
+    <a href="{{ redirect_url }}" class="btn btn--yellow btn--big">{{ "try_again"|trans }}</a>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,214 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * CashoutBalance
+ *
+ * @ORM\Table(name="cashout_balance")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CashoutBalanceRepository")
+ */
+class CashoutBalance
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string $trade_url
+     * @ORM\Column(name="trade_url", type="string", options={"comment":"trade url"})
+     */
+    private $trade_url;
+
+    /**
+     * @var string $steam_id
+     * @ORM\Column(name="steam_id", type="string", options={"comment":"steam id"})
+     */
+    private $steam_id;
+
+    /**
+     * @var \DateTime $created
+     * @ORM\Column(name="created", type="datetime", options={"comment":"date of create row"})
+     */
+    private $created;
+
+    /**
+     * @var \DateTime $updated
+     * @ORM\Column(name="updated", type="datetime", options={"comment":"date of last update row"}, nullable=true)
+     */
+    private $updated;
+
+    /**
+     * @var $amount
+     * @ORM\Column(name="amount", type="decimal", precision=10, scale=2, nullable=true)
+     */
+    private $amount;
+
+    /**
+     * @var string $email
+     * @ORM\Column(name="email", type="string", nullable=true)
+     */
+    private $email;
+
+
+    /**
+     * Get id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set tradeUrl
+     *
+     * @param string $tradeUrl
+     *
+     * @return CashoutBalance
+     */
+    public function setTradeUrl($tradeUrl)
+    {
+        $this->trade_url = $tradeUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get tradeUrl
+     *
+     * @return string
+     */
+    public function getTradeUrl()
+    {
+        return $this->trade_url;
+    }
+
+    /**
+     * Set steamId
+     *
+     * @param string $steamId
+     *
+     * @return CashoutBalance
+     */
+    public function setSteamId($steamId)
+    {
+        $this->steam_id = $steamId;
+
+        return $this;
+    }
+
+    /**
+     * Get steamId
+     *
+     * @return string
+     */
+    public function getSteamId()
+    {
+        return $this->steam_id;
+    }
+
+    /**
+     * Set created
+     *
+     * @param \DateTime $created
+     *
+     * @return CashoutBalance
+     */
+    public function setCreated($created)
+    {
+        $this->created = $created;
+
+        return $this;
+    }
+
+    /**
+     * Get created
+     *
+     * @return \DateTime
+     */
+    public function getCreated()
+    {
+        return $this->created;
+    }
+
+    /**
+     * Set updated
+     *
+     * @param \DateTime $updated
+     *
+     * @return CashoutBalance
+     */
+    public function setUpdated($updated)
+    {
+        $this->updated = $updated;
+
+        return $this;
+    }
+
+    /**
+     * Get updated
+     *
+     * @return \DateTime
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
+
+    /**
+     * Set amount
+     *
+     * @param string $amount
+     *
+     * @return CashoutBalance
+     */
+    public function setAmount($amount)
+    {
+        $this->amount = $amount;
+
+        return $this;
+    }
+
+    /**
+     * Get amount
+     *
+     * @return string
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return CashoutBalance
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+}

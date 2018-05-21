@@ -1,0 +1,10 @@
+#!/bin/bash
+
+sudo chown -R 82:82 .
+
+docker-compose up composer_manager
+docker-compose up -d mariadb php doctrine_updater nginx redis rabbitmq
+docker-compose run --user 82 php ./vendor/bin/phpunit tests
+
+sudo chown -R jenkins:jenkins .
+docker-compose down --remove-orphans

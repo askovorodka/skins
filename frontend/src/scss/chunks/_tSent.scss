@@ -1,0 +1,53 @@
+.tSent{
+  text-align: center;
+  &__row{
+    display: flex;
+    justify-content: center;
+    @media screen and (max-width: 380px){
+      display: block;
+    }
+    div{
+      background: #13151c;
+      padding: 0 30px;
+      margin-right: 10px;
+      border-radius: 2px;
+      border-bottom: 1px solid #2f3138;
+      @media all and (max-width: 1000px){
+        display: flex;
+        align-items: center;
+      }
+      @media all and (min-width: 1000px){
+        padding: 10px 30px 0 30px;
+      }
+      @media screen and (max-width: 380px) {
+        display: block;
+      }
+      > p:first-child{
+        color: #edb140;
+        font-size: 26px;
+        @media screen and (max-width:380px) {
+          font-size: 16px;
+        }
+      }
+      > p:last-child{
+        color: #676e81;
+        font-size: 15px;
+      }
+      a {
+        @media screen and (max-width: 380px){
+          display: block;
+        }
+      }
+    }
+  }
+  &__mob{
+    color: #676e81;
+    font-size: 12px;
+    padding-top: 10px;
+  }
+  &__counter{
+    display: flex;
+    justify-content: center;
+    margin: 15px 0 20px 0;
+  }
+}

@@ -1,0 +1,66 @@
+# This file is a "template" of what your parameters.yml file should look like
+# Set parameters here that may be different on each deployment target of the app, e.g. development, staging, production.
+# http://symfony.com/doc/current/best_practices/configuration.html#infrastructure-related-configuration
+parameters:
+    database_host:     127.0.0.1
+    database_port:     ~
+    database_name:     symfony
+    database_user:     root
+    database_password: root
+    # You should uncomment this if you want use pdo_sqlite
+    # database_path: "%kernel.root_dir%/data.db3"
+
+    mailer_transport: gmail
+    mailer_user: i.bikmullin@cases4real.com
+    mailer_password: ~
+    #    mailer_host: 178.62.70.203:25
+    #    mailer_user: null
+    #    mailer_password: null
+
+    # A secret key that's used to generate certain security-related tokens
+    secret:            ThisTokenIsNotSoSecretChangeIt
+
+    bot_url: ~
+    bot_secret: null
+
+    cases_url: https://cases4real.com
+    cases_api_key: ~
+
+    rabbitmq_host: 'localhost'
+    rabbitmq_port: '5672'
+    rabbitmq_user: 'guest'
+    rabbitmq_password: 'guest'
+    rabbitmq_vhost: '/'
+
+    slack_token: ~
+    slack_api_token: ~
+    slack_channel: alerts-skins4real
+    slack_bot_name: Skins4Real
+    slack_bot_icon_emoji: :rage:
+    slack_level_alerts: notice
+    slack_channel_alerts: alerts-skins4real
+    slack_channel_notice: alerts-s4r-in
+    crsf_inscription_inception: hyelolo
+
+    jwt_private_key_path: '%kernel.root_dir%/../var/jwt/private.pem' # ssh private key path
+    jwt_public_key_path:  '%kernel.root_dir%/../var/jwt/public.pem'  # ssh public key path
+    jwt_key_pass_phrase:  ''                                         # ssh key pass phrase
+    jwt_token_ttl:        3600
+
+
+    email.feedback.subject: 'Skins4Real feedback'
+    email.feedback.from: 'admin@skins4real.com'
+    email.feedback.to: 'i.bikmullin@cases4real.com'
+    email.debit.subject: 'Skins4Real new debit request'
+    email.debit.from: 'admin@skins4real.com'
+    email.debit.to: 'i.bikmullin@cases4real.com'
+    casperjs_host: casperjs
+    casperjs_port: 2121
+    reports_path: '%kernel.root_dir%/../web/reports/'
+    dota2_whitelist_url: ~
+    redis_dsn_default: redis://OWpmw29SOOPxms@redis_default:6379
+    notification_email: ~
+    captcha_partner_secret_key: ~
+    captcha_partner_site_key: ~
+    captcha_ad_secret_key: ~
+    captcha_ad_site_key: ~

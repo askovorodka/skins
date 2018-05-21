@@ -1,0 +1,123 @@
+{
+    "name": "ahimas/skins4real",
+    "license": "proprietary",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/"  },
+        "classmap": [ "app/composer/CodeStyle.php" ]
+    },
+    "require": {
+        "php": ">=7.0",
+        "symfony/symfony": "3.2.*",
+        "doctrine/orm": "^2.5",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/doctrine-cache-bundle": "^1.2",
+        "symfony/swiftmailer-bundle": "^2.3",
+        "symfony/monolog-bundle": "^2.8",
+        "symfony/polyfill-apcu": "^1.0",
+        "sensio/distribution-bundle": "^5.0",
+        "sensio/framework-extra-bundle": "^3.0.2",
+        "incenteev/composer-parameter-handler": "^2.0",
+        "phpunit/phpunit": "^5.5",
+        "guzzlehttp/guzzle": "^6.2",
+        "snc/redis-bundle": "2.x-dev",
+        "predis/predis": "^1.0",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "sonata-project/admin-bundle": "^3.8",
+        "sonata-project/doctrine-orm-admin-bundle": "^3.1",
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "symfony/assetic-bundle": "^2.8",
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "php-amqplib/rabbitmq-bundle": "^1.11",
+        "nexylan/slack-bundle": "^1.0",
+        "beberlei/DoctrineExtensions": "^1.0",
+        "knplabs/knp-paginator-bundle": "^2.5",
+        "white-october/pagerfanta-bundle": "^1.0",
+        "lexik/jwt-authentication-bundle": "^2.1",
+        "nelmio/cors-bundle": "^1.5",
+        "deployer/deployer": "^4.3",
+        "jimdo/prometheus_client_php": "^0.9.0",
+        "syslogic/doctrine-json-functions": "^1.1",
+        "mk-j/php_xlsxwriter": "^0.32.0",
+        "cleentfaar/slack-bundle": "^0.20.1"
+    },
+    "require-dev": {
+        "sensio/generator-bundle": "^3.0",
+        "symfony/phpunit-bridge": "^3.0",
+        "friendsofphp/php-cs-fixer": "^2.2"
+    },
+    "scripts": {
+        "symfony-scripts": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
+            "CodeStyle::installPreCommitHook"
+        ],
+        "post-install-cmd": [
+            "@symfony-scripts"
+        ],
+        "post-update-cmd": [
+            "@symfony-scripts"
+        ]
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
+        "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
+        "symfony-assets-install": "relative",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "env-map": {
+                "database_host": "SKINS4REAL_DATABASE_HOST",
+                "database_port": "SKINS4REAL_DATABASE_PORT",
+                "database_name": "SKINS4REAL_DATABASE_NAME",
+                "database_user": "SKINS4REAL_DATABASE_USER",
+                "database_password": "SKINS4REAL_DATABASE_PASSWORD",
+                "mailer_transport": "SKINS4REAL_MAILER_TRANSPORT",
+                "mailer_host": "SKINS4REAL_MAILER_HOST",
+                "mailer_user": "SKINS4REAL_MAILER_USER",
+                "mailer_password": "SKINS4REAL_MAILER_PASSWORD",
+                "secret": "SKINS4REAL_SECRET",
+                "redis_dsn_default": "SKINS4REAL_REDIS_DSN_DEFAULT",
+                "redis_dsn_cache": "SKINS4REAL_REDIS_DSN_CACHE",
+                "redis_dsn_session": "SKINS4REAL_REDIS_DSN_SESSION",
+                "bot_url": "SKINS4REAL_BOT_URL",
+                "bot_secret": "SKINS4REAL_BOT_SECRET",
+                "cases_url": "SKINS4REAL_CASES_URL",
+                "cases_api_key": "SKINS4REAL_CASES_API_KEY",
+                "redis_host": "SKINS4REAL_REDIS_HOST",
+                "rabbitmq_host": "SKINS4REAL_RABBITMQ_HOST",
+                "rabbitmq_port": "SKINS4REAL_RABBITMQ_PORT",
+                "rabbitmq_user": "SKINS4REAL_RABBITMQ_USER",
+                "rabbitmq_password": "SKINS4REAL_RABBITMQ_PASSWORD",
+                "rabbitmq_vhost": "SKINS4REAL_RABBITMQ_VHOST",
+                "slack_token": "SKINS4REAL_SLACK_TOKEN",
+                "crsf_inscription_inception": "SKINS4REAL_CSRF_INSCRIPTION_INCEPTION",
+                "jwt_private_key_path": "JWT_PRIVATE_KEY_PATH",
+                "jwt_public_key_path": "JWT_PUBLIC_KEY_PATH",
+                "jwt_key_pass_phrase": "JWT_PASS",
+                "jwt_token_ttl": "JWT_TOKEN_TTL",
+                "email.feedback.subject":"EMAIL_FEEDBACK_SUBJECT",
+                "email.feedback.from": "EMAIL_FEEDBACK_FROM",
+                "email.feedback.to": "EMAIL_FEEDBACK_TO",
+                "email.debit.subject": "EMAIL_DEBIT_SUBJECT",
+                "email.debit.from": "EMAIL_DEBIT_FROM",
+                "email.debit.to": "EMAIL_DEBIT_TO"
+            }
+        }
+    }
+}

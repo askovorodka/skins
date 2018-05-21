@@ -1,0 +1,60 @@
+.skinsFinal{
+  text-align: center;
+  p.zag{
+    margin: 10px 0 10px 0;
+  }
+  .btn{
+    margin-top: 20px;
+  }
+  &__icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    margin: 0 auto;
+    position: relative;
+    &:before,
+    &:after{
+      display: block;
+      content: '';
+      width: 2px;
+      background: #fff;
+      position: absolute;
+    }
+    
+    &--success{
+      border: 2px solid #53c594;
+      &:before,
+      &:after{
+        bottom: 11px;
+        left: calc(50% - 4px); 
+      }
+      &:before{
+        height: 8px;
+        transform: rotate(-40deg);
+        transform-origin: left bottom
+      }
+      &:after{
+        height: 18px;
+        transform: rotate(40deg);
+        transform-origin: left bottom
+      }
+    }
+    &--fail{
+      border: 2px solid #ff0700;
+      &:before,
+      &:after{
+        height: 20px;
+        top: 8px;
+        left: calc(50% - 1px);
+      }
+      &:before{
+        transform: rotate(-45deg);
+        transform-origin: center;
+      }
+      &:after{
+        transform: rotate(45deg);
+        transform-origin: center;
+      }
+    }
+  }
+}

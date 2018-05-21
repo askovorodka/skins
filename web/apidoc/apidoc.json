@@ -1,0 +1,14 @@
+{
+  "name": "Skins4Real",
+  "version": "1.0.0",
+  "description": "Skins4Real документация по интеграции",
+  "title": "Skins4Real",
+  "header": {
+    "title": "Интеграция skins4real",
+    "filename": "header.md"
+  },
+  "template": {
+  	"withCompare": true,
+  	"withGenerator": true
+  }
+}

@@ -1,0 +1,20 @@
+.langSwitch{
+  margin-left: 4px;
+  span{
+    cursor: pointer;
+    background: transparent;
+    margin: 0 3px;
+    padding: 0 10px;
+    line-height: 36px;
+    height: 42px;
+    border: 2px solid #292d35;
+    transition: all 0.3s ease;
+    &:hover{
+      background: #131313;
+    }
+  }
+  &--disable{
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}

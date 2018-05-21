@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Skins4Real{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('assets/build/css/reset.min.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700&amp;subset=cyrillic" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('assets/build/css/landing.min.css') }}">
+    {% endblock %}
+</head>
+<body>
+
+<header class="page-header">
+    <div class="page-header__container">
+        <div class="page-logo">
+            <a href="#home" class="page-logo__link"><img class="page-logo__image" src="/assets/build/images/logo.png" alt="" width="156" height="43"></a>
+        </div>
+        <nav class="main-navigation-container">
+            <ul class="main-navigation">
+                <li class="main-navigation__item main-navigation__item--menu-button"></li>
+                <li class="main-navigation__item"><a class="main-navigation__link main-navigation__link--home" href="#product">Продукт</a></li>
+                <li class="main-navigation__item"><a class="main-navigation__link main-navigation__link--market">Рынок скинов</a></li>
+                <li class="main-navigation__item"><a class="main-navigation__link main-navigation__link--home" href="#partners">Партнёрство</a></li>
+                <li class="main-navigation__item"><a class="main-navigation__link main-navigation__link--home" href="#contact-form">Контакты</a></li>
+                <li class="main-navigation__item"><a class="main-navigation__link main-navigation__link--orange">Кабинет</a></li>
+            </ul>
+        </nav>
+        <div class="login-form-container hidden">
+            {{ form_start(login_form,{ 'attr' : { 'class': 'login-form' } }) }}
+            {{ form_widget(login_form.username, { 'attr': {'class': 'login-form__input'} }) }}
+            {{ form_widget(login_form.password, { 'attr': {'class': 'login-form__input'} }) }}
+            <button class="login-form__button button" type="submit">Вход</button>
+            {{ form_end(login_form) }}
+            <a href="#contact-form" class="reg-link scroll-to">Запрос на подключение</a>
+        </div>
+    </div>
+</header>
+<div class="side-gradient"></div>
+<article class="index-main">
+
+    <section class="home" id="home">
+        <div class="section-wrapper">
+            <div class="home__logo">
+                <div class="home__logo-image-container">
+                    <img src="/assets/build/images/logo.png" alt="" class="home__logo-image">
+                </div>
+                <h1 class="home__logo-title">B2B-сервис<br><span class="home__logo-subtitle">По оплате скинами</span></h1>
+            </div>
+            <div class="home__buttons">
+                <a href="#contact-form" class="button scroll-to">Заявка на подключение</a>
+                <a class="button button--faq">Читать FAQ</a>
+            </div>
+            <div class="home__description">
+                <div class="home__description-item description-item">
+                    <div class="description-item__image description-item__image--1">
+                        <p class="description-item__caption description-item__caption--first">
+                            Молодые люди в возрасте 16-24 лет (основная группа людей, использующих скины) являются
+                            платежеспособной, но сильно недооцененной аудиторией. Компании, не понимающие принципы работы с
+                            данной аудиторией, теряют потенциальную прибыль.
+                        </p>
+                    </div>
+                    <h2 class="description-item__title">Рсширяем вашу аудиторию</h2>
+                </div>
+                <div class="home__description-item">
+                    <div class="description-item__image description-item__image--2">
+                        <p class="description-item__caption description-item__caption--second">
+                            Платежи скинами дают возможность не только привлечь новую аудиторию, но и поднять средний чек на
+                            платящего пользователя в возрасте 16-24 лет. А значит, увеличить уже существующую прибыль.
+                        </p>
+                    </div>
+                    <h2 class="description-item__title">Поднимаем чек и вашу прибыль</h2>
+                </div>
+                <div class="home__description-item">
+                    <div class="description-item__image description-item__image--3">
+                        <p class="description-item__caption description-item__caption--third">
+                            Подключение платежей скинами является новой популярной тенденцией. В глазах клиентов и партнеров вы
+                            создаете имидж высокотехнологичной, идущей в ногу со временем компании.
+                        </p>
+                    </div>
+                    <h2 class="description-item__title">Создаем современный имидж</h2>
+                </div>
+            </div>
+            <div class="arrow"><a class="scroll-to" href="#product">Arrow</a></div>
+            <span id="product">&nbsp;</span>
+        </div>
+    </section>
+
+    <section class="product">
+        <div class="section-title section-wrapper">
+            <h2 class="main-title main-title--with-image main-title--first">Что такое <img class="main-title__image" src="/assets/build/images/logo.png" width="236" height="64" alt=""></h2>
+        </div>
+        <div class="section-wrapper">
+            <div class="box">
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--1"></div>
+                    <p class="box__item-caption">
+                        Ваш клиент оплачивает товар<br> скинами. Вы получаете<br> стоимость товара в денежном<br> эквиваленте.
+                    </p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--2"></div>
+                    <p class="box__item-caption">
+                        Регулярные выплаты в удобной<br> валюте и платежной системе.
+                    </p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--3"></div>
+                    <p class="box__item-caption">
+                        Выплаты НЕ зависят от сроков<br> реализации скинов, которыми<br> был пополнен счёт.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="section-wrapper">
+                <div class="row__item">
+                    <img src="/assets/build/images/col--1.png" alt="" class="row__item-image">
+                    <p class="row__item-caption">
+                        Личный кабинет - все<br> необходимые метрики в удобном<br> формате.
+                    </p>
+                </div>
+                <div class="row__item">
+                    <img src="/assets/build/images/col--2.png" alt="" class="row__item-image">
+                    <p class="row__item-caption">
+                        Настройка функционала личного<br> кабинета и платежного шлюза<br> под ваши нужды.
+                    </p>
+                </div>
+            </div>
+            <div class="section-wrapper">
+                <div class="arrow"><a class="scroll-to" href="#advantages"></a></div>
+                <span id="advantages">&nbsp;</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="advantages">
+        <div class="section-wrapper">
+            <div class="box">
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--4"></div>
+                    <p class="box__item-caption">
+                        White Label:<br> использование сервиса без<br> упоминания нашего бренда.
+                    </p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--5"></div>
+                    <p class="box__item-caption">
+                        Привлекательная стоимость<br> покупки и широкий спектр<br> приёма различных скинов на<br> рынке.
+                    </p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--6"></div>
+                    <p class="box__item-caption">
+                        Взаимное продвижения за счёт<br> ресурсов группы компаний 4Real.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="section-wrapper">
+                <div class="row__item">
+                    <img src="/assets/build/images/col--3.png" alt="" class="row__item-image">
+                    <p class="row__item-caption">
+                        Круглосуточная техподдержка<br> клиента с возможностью прямой<br> связи.
+                    </p>
+                </div>
+                <div class="row__item">
+                    <img src="/assets/build/images/col--4.png" alt="" class="row__item-image">
+                    <p class="row__item-caption">
+                        Предоставляем доступ к оптовой<br> скупке скинов по заданным<br> критериям напрямую.
+                    </p>
+                </div>
+            </div>
+            <div class="section-wrapper">
+                <div class="arrow"><a class="scroll-to" href="#partnership"></a></div>
+                <span id="partnership">&nbsp;</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="partnership">
+        <div class="section-title section-wrapper">
+            <h2 class="main-title main-title--with-image">Условия использования <img class="main-title__image" src="/assets/build/images/logo.png" width="236" height="64" alt=""></h2>
+        </div>
+
+        <div class="section-wrapper">
+            <div class="box">
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--7"></div>
+                    <b class="box__item-title">10% на ввод</b>
+                    <p class="box__item-caption">
+                        При пополнении на сайте<br> партнёра комиссия Skins4Real<br> составляет 10%.
+                    </p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--8"></div>
+                    <b class="box__item-title">5% на вывод</b>
+                    <p class="box__item-caption">
+                        Комиссия за вывод денежных<br> средств через платёжные<br> системы составляет 5%.
+                    </p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--9"></div>
+                    <b class="box__item-title">White label</b>
+                    <p class="box__item-caption">
+                        Сервис может быть подключён на<br> условиях White Label.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="section-wrapper">
+                <div class="row__item">
+                    <img src="/assets/build/images/col--5.png" alt="" class="row__item-image">
+                    <b class="row__item-title">Гибкие комиссии</b>
+                    <p class="row__item-caption">
+                        В случае стратегического<br> партнёрства размер комиссий<br> может быть уменьшен.
+                    </p>
+                </div>
+                <div class="row__item">
+                    <img src="/assets/build/images/col--6.png" alt="" class="row__item-image">
+                    <b class="row__item-title">Модернизация</b>
+                    <p class="row__item-caption">
+                        Техническое сопровождение и<br> модернизация оплачивается<br> стороной Skins4Real.
+                    </p>
+                </div>
+            </div>
+            <div class="section-wrapper">
+                <div class="arrow"><a class="scroll-to" href="#partners"></a></div>
+                <span id="partners">&nbsp;</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners">
+        <div class="section-wrapper">
+            <div class="partners-container">
+                <div class="left-col">
+                    <div class="left-col__logo">
+                        <img class="left-col__logo-image img-group-1 hidden" src="/assets/build/images/group--1--big.png" alt="">
+                        <img class="left-col__logo-image img-group-2 hidden" src="/assets/build/images/logo.png" alt="">
+                        <img class="left-col__logo-image img-group-3 hidden" src="/assets/build/images/group--3--big.png" alt="">
+                        <img class="left-col__logo-image img-partner-1" src="/assets/build/images/partner--1--big.jpg" alt="">
+                        <img class="left-col__logo-image img-partner-2 hidden" src="/assets/build/images/partner--2--big.jpg" alt="">
+                        <img class="left-col__logo-image img-partner-3 hidden" src="/assets/build/images/partner--3--big.jpg" alt="" >
+                        <img class="left-col__logo-image img-partner-4 hidden" src="/assets/build/images/partner--4--big.jpg" alt="">
+                    </div>
+                    <div class="left-col__caption caption-group-1 hidden">
+                        <p class="left-col__caption-item">Один из крупнейших игроков рынка кейсов CS:GO в мире на данный момент.</p>
+                        <p class="left-col__caption-item">Войдя на уже сформированный рынок в конце 2016 года, мы заняли свою нишу благодаря качеству сервиса и нововведениям, с которыми считаются наши конкуренты.</p>
+                    </div>
+                    <div class="left-col__caption caption-group-2 hidden">
+                        <p class="left-col__caption-item">Платёжная система по приёму внутриигровых предметов.</p>
+                        <p class="left-col__caption-item">Проект, изначально разработанный для собственных нужд, оказался куда качественней и удобней, чем имевшиеся на тот момент аналоги, что позволило нам достаточно быстро найти себе партнёров.</p>
+                    </div>
+                    <div class="left-col__caption caption-group-3 hidden">
+                        <p class="left-col__caption-item">Маркетинговое агентство, оказывающее услуги по продвижению и подготовке рекламных кампаний в области игровой тематики и киберспорта “под ключ”.</p>
+                        <p class="left-col__caption-item">Мы сотрудничаем с большинством известных блогеров и видеостримеров, часть из которых полноценно продюсируем.</p>
+                        <p class="left-col__caption-item">Для продвижения проектов наших партнёров мы используем медиабазу всей группы компаний, которая насчитывает около миллиона уникальных пользователей (без учёта продвижения у лидеров мнений).</p>
+                    </div>
+                    <div class="left-col__caption caption-partner-1">
+                        <p class="left-col__caption-item left-col__caption-item--linked">
+                            <a class="left-col__caption-link" href="http://csgo-happy.ru" target="_blank">csgo-happy.ru</a>
+                        </p>
+                    </div>
+                    <div class="left-col__caption caption-partner-2 hidden">
+                        <p class="left-col__caption-item left-col__caption-item--linked">
+                            <a class="left-col__caption-link" href="https://happy-random.com/" target="_blank">happy-random.com</a>
+                        </p>
+                    </div>
+                    <div class="left-col__caption caption-partner-3 hidden">
+                        <p class="left-col__caption-item left-col__caption-item--linked">
+                            <a class="left-col__caption-link" href="https://windrop.ru/" target="_blank">windrop.ru</a>
+                        </p>
+                    </div>
+                    <div class="left-col__caption caption-partner-4 hidden">
+                        <p class="left-col__caption-item left-col__caption-item--linked">
+                            <a class="left-col__caption-link" href="http://glory-case.com/" target="_blank">glory-case.com</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="right-col">
+                    <div class="right-col__toggle">
+                        <h2 class="main-title main-title--clickable toggle__partners">Наши партнеры</h2>
+                        <h2 class="main-title main-title--clickable main-title--inactive toggle__group">Группа компаний</h2>
+                    </div>
+                    <div class="right-col__logos-box logos-partners">
+                        <div class="right-col__logos-box-item box-partner-1">
+                            <img class="right-col__logos-box-image right-col__logos-box-image--active" src="/assets/build/images/partner--1.png" alt="">
+                        </div>
+                        <div class="right-col__logos-box-item box-partner-2">
+                            <img class="right-col__logos-box-image" src="/assets/build/images/partner--2.png" alt="">
+                        </div>
+                        <div class="right-col__logos-box-item box-partner-3">
+                            <img class="right-col__logos-box-image" src="/assets/build/images/partner--3.png" alt="">
+                        </div>
+                        <div class="right-col__logos-box-item box-partner-4">
+                            <img class="right-col__logos-box-image" src="/assets/build/images/partner--4.png" alt="">
+                        </div>
+                    </div>
+                    <div class="right-col__logos-box logos-group hidden">
+                        <div class="right-col__logos-box-item box-group-1">
+                            <img class="right-col__logos-box-image right-col__logos-box-image--active" src="/assets/build/images/group--1.png" alt="">
+                        </div>
+                        <div class="right-col__logos-box-item box-group-2">
+                            <img class="right-col__logos-box-image" src="/assets/build/images/group--2.png" alt="">
+                        </div>
+                        <div class="right-col__logos-box-item box-group-3">
+                            <img class="right-col__logos-box-image" src="/assets/build/images/group--3.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#contact-form" class="button scroll-to">Заявка на подключение</a>
+        </div>
+    </section>
+
+    <section class="contacts" id="contact-form">
+        <div class="section-wrapper">
+            <h2 class="main-title">Отправить запрос</h2>
+            <div class="main-form-wrapper">
+                {{ form_start(partner_form,{ 'attr' : { 'class': 'main-form partner_send' } }) }}
+                    <b class="main-form__title">Подключение к сервису Skins4Real:</b>
+                    {{ form_widget(partner_form.username, { 'attr': {'class': 'main-form__input'} }) }}
+                    {{ form_widget(partner_form.company, { 'attr': {'class': 'main-form__input'} }) }}
+                    {{ form_widget(partner_form.email, { 'attr': {'class': 'main-form__input'} }) }}
+                    {{ form_widget(partner_form.phone, { 'attr': {'class': 'main-form__input mobile_phone'} }) }}
+                    <div class="g-recaptcha" id="partner"></div>
+                    <button class="main-form__button button partner" type="submit">Отправить запрос</button>
+                {{ form_end(partner_form) }}
+
+                <h2 class="main-title main-title--mobile">Отправить запрос</h2>
+                {{ form_start(ad_form,{ 'attr' : { 'class': 'main-form ad_send' } }) }}
+                    <b class="main-form__title">Совместные рекламные кампании:</b>
+                    {{ form_widget(ad_form.username, { 'attr': {'class': 'main-form__input'} }) }}
+                    {{ form_widget(ad_form.company, { 'attr': {'class': 'main-form__input'} }) }}
+                    {{ form_widget(ad_form.email, { 'attr': {'class': 'main-form__input'} }) }}
+                    {{ form_widget(ad_form.phone, { 'attr': {'class': 'main-form__input mobile_phone'} }) }}
+                    <div class="g-recaptcha" id="ad"></div>
+                    {#<div class="g-recaptcha" data-sitekey="{{ partner_site_key }}"></div>#}
+                    <button class="main-form__button button ad" type="submit">Отправить запрос</button>
+                {{ form_end(ad_form) }}
+            </div>
+            <div class="arrow arrow--up"><a class="scroll-to" href="#home"></a></div>
+        </div>
+    </section>
+
+</article>
+
+<article class="market-main hidden">
+
+    <section class="skins">
+        <div class="section-wrapper">
+            <h2 class="main-title">Скины - альтернативная валюта интернета.</h2>
+            <p class="skins__caption">
+                Скины — уникальные текстуры снаряжения персонажа в онлайновых играх, которые игрок может использовать вместо стандартных текстур.
+                <br>
+                Эти предметы служат исключительно для улучшения эстетического восприятия игрового персонажа. Скины обладают следующими свойствами:
+            </p>
+            <div class="box box--wide">
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--market1"></div>
+                    <p class="box__item-caption">14 млн. игроков в <span>CS:GO</span><br>24 млн. игроков в <span>Dota2</span></p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--market2"></div>
+                    <p class="box__item-caption">Цены на скины определяются рыночным спросом на торговых площадках БЕЗ вмешательств издателей.</p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--market3"></div>
+                    <p class="box__item-caption">Рулетки, букмекерские конторы, беспроигрышные лотереи, сервисы по обмену и многое другое.</p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--market4"></div>
+                    <p class="box__item-caption">В 2016 году оборот только рынка ставок на скины превысил<br>$7,5 млрд.</p>
+                </div>
+                <div class="box__item">
+                    <div class="box__item-image  box__item-image--market5"></div>
+                    <p class="box__item-caption">Рост на 60% в год лишь<br>усиливает интерес к скинам<br>у аудитории.</p>
+                </div>
+            </div>
+            <p class="skins__footer">
+                Все это позволяет смело говорить, что скины в текущих реалиях — полноценная конвертируемая валюта, которой пользуются миллионы людей.
+            </p>
+            <div class="arrow"><a class="scroll-to" href="#market"></a></div>
+        </div>
+        <span id="market">&nbsp;</span>
+    </section>
+    <section class="market">
+        <div class="section-wrapper">
+            <h2 class="main-title">Рынок ставок на скины</h2>
+            <span class="main-title__subtitle">до 2020 года</span>
+            <div class="dynamics">
+                <div class="dynamics__item indicator">
+                    <span class="indicator__price">$ 7,4 млрд.</span>
+                    <div class="indicator__field">
+                        <div class="indicator__field-fill"></div>
+                    </div>
+                    <span class="indicator__year">2016</span>
+                </div>
+                <div class="dynamics__item indicator">
+                    <span class="indicator__price">$ 9,9 млрд.</span>
+                    <div class="indicator__field">
+                        <div class="indicator__field-fill"></div>
+                    </div>
+                    <span class="indicator__year">2017</span>
+                </div>
+                <div class="dynamics__item indicator">
+                    <span class="indicator__price">$ 13 млрд.</span>
+                    <div class="indicator__field">
+                        <div class="indicator__field-fill"></div>
+                    </div>
+                    <span class="indicator__year">2018</span>
+                </div>
+                <div class="dynamics__item indicator">
+                    <span class="indicator__price">$ 16 млрд.</span>
+                    <div class="indicator__field">
+                        <div class="indicator__field-fill"></div>
+                    </div>
+                    <span class="indicator__year">2019</span>
+                </div>
+                <div class="dynamics__item indicator">
+                    <span class="indicator__price">$ 19,7 млрд.</span>
+                    <div class="indicator__field">
+                        <div class="indicator__field-fill"></div>
+                    </div>
+                    <span class="indicator__year">2020</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</article>
+
+<article class='faq-page hidden'>
+    <div class='section-wrapper'>
+        <h2 class='main-title'>FAQ</h2>
+        <dl class='faq'>
+            <dt>Whitelabel</dt>
+            <dd>
+                При подключении Skins4Real мы предоставляем нашим партнерам услугу Whitelabel, которая позволит вам использовать наш сервис без какого-либо упоминания того, что вы предоставляете своим клиентам сторонний сервис для оплаты услуг. Это становится возможным при помощи открытого API, который мы рады предоставить, по первому запросу. За дополнительной консультацией и помощью в настройке Whitelabel, обратитесь к нашим специалистам через форму обратной связи.
+            </dd>
+            <dt>Заявка на подключение</dt>
+            <dd>
+                Для того чтобы воспользоваться сервисом Skins4Real и подключить его к своему проекту, вам достаточно просто оставить заявку и один из наших специалистов свяжется с вами в течении 24 часов. Мы создадим ваш личный кабинет, при необходимости, заключим договор на использование сервиса и поможем подключить Skins4Real к вашему сайту.
+            </dd>
+            <dt>Техническая поддержка и поддержка клиентов</dt>
+            <dd>При возникновении каких-либо неполадок в использовании сервиса, вы можете обратиться в службу поддержки, работающую 24/7 и мы решим ваш вопрос как можно скорее. При желании, мы можем подключить свою систему поддержки на ваш сайт, с использованием механизма Whitelabel (или без него) и осуществлять поддержку ваших клиентов, по работе нашего сервиса. <span class='show-sub-dd'>Дополнительная инструкция</span> по подключению поддержки клиентов
+                <div class=sub-dd>
+                    <p>
+                        Функциональные элементы<br>
+                        В верхнем правом углу сайта расположены кнопки переключения языка:<br>
+                        RU -- русский, EN -- английский, CN -- китайский.
+                    </p>
+                    <p>
+                        Справа от кнопок переключения языка расположен индикатор работы Steam. Зеленый цвет означает идеальную работу, синий цвет -- работу с задержками, красный цвет сообщает о недоступности серверов Steam.
+                    </p>
+                    <p>
+                        Справа от кнопок с индикацией статусов Steam расположена кнопка выхода из личного кабинета.
+                    </p>
+                    <p>
+                        На второй строке расположено имя владельца аккаунта и его порядковый номер в системе Skins4Real.
+                    </p>
+                    <p>
+                        В правой части второй строки расположен текущий баланс вашего аккаунта, а также кнопка вывода средств. При нажатии на кнопку вывода средств открывается окно, где можно выбрать одну из трех платежных систем, указать номер своего кошелька и сумму платежа. Также обратите внимание на поле для заметок: так как все выводы осуществляются в ручном режиме, вы можете оставить заметку для сотрудника, который будет выводить средства. При нажатии на кнопку “Отправить заявку” вы передадите свое обращение о выводе средств. Также, в левой части окна доступна кнопка “История выплат”, которая выведет список всех успешных транзакций о выводе средств с сайта.
+                    </p>
+                    <p>
+                        Your account’s current balance and funds withdrawal button are located in the right part of the second line. Pressing the funds withdrawal button opens the window, where you can select one of three payment systems, specify the wallet number and the payment amount. Also, pay attention on the Notes field: as all funds withdrawal operations are performed manually, you can leave a note for the employee, which will withdraw funds. Pressing the "Send note" button will submit your funds withdrawal request. Also, in the window left part, the “Payments history” button is available; it will display the list of all successful transactions of funds withdrawal from the site.
+                    </p>
+                    <p>
+                        В третьем ряду главной страницы расположены кнопки “Статистика”, “Транзакции”, “Графики” и “Отчеты”, а справа от этих кнопок расположен инструмент для выбора периода для формирования отчета. При нажатии на кнопку с выбором даты, станет возможным выбрать начальную дату отчета и конечную дату. Также можно выбрать транзакции за календарные месяц, неделю, год и сегодняшние транзакции.
+                    </p>
+                    <p>
+                        Вкладка статистика отражает историю платежей за выбранный период. Можно переключаться между платежами по CS:GO, DOTA или же просмотреть все сразу. Пользовательские действия показывает успешность транзакций. Обратите внимание, что статистика показывается в два ряда: сверху отображается статистика рублевых пополнений, а снизу долларовых.
+                    </p>
+                    <p>
+                        Вкладка транзакции выводит список платежей за выбранный период. Доступен поиск по номеру транзакции, который показывается в истории платежей на вашем интернет-ресурсе, к которому подключен Skins4Real, а также фильтрация по стоимости транзакции и по количеству предметов. В центральной части экрана отображен список всех проведенных на сайте транзакций. Слева каждой транзакции имеется цифровой индикатор, соответствующий ее статусу: зеленый - транзакция завершена, желтый - транзакция не подтверждена пользователем, красный - транзакция отменена пользователем.
+                    </p>
+                    <p>
+                        Вкладка графики визуализирует информацию из предыдущих вкладок. Кликая на кнопки “Доход”, “Средний чек” и “Уникальных пользователей” можно включать и отключать отображение данных линий на графике. Под графиком расположены кнопки группировки транзакций по часам, дням, месяцам и годам. В правом верхнем углу графика доступна кнопка для переключения валюты (обратите внимание, что платежи показываются отдельно для рублей и отдельно для долларов).
+                    </p>
+                    <p>
+                        Вкладка отчеты позволяет сформировать отчет по всем транзакциям за выбранный период и экспортировать его в форматах .csv и .xlsx. Детализированные отчеты показывают всю имеющуюся информацию о каждой транзакции за период.
+                        Кнопка центр поддержки в самом низу интерфейса открывает эту страницу. В левом меню также можно получить контактную информацию для связи с поддержкой.
+                    </p>
+                    <p>
+                        Как мне вывести деньги из Skins4Real?<br>
+                        Для того чтобы вывести средства со своего счета на Skins4Real необходимо нажать на кнопку "ВЫВЕСТИ", указать сумму, которую Вы хотите списать со своего счета, выбрать валюту, указать желаемую платежную систему для получения средств и предоставить реквизиты.
+                    </p>
+                    <p>
+                        Насколько долго рассматривается заявка на вывод средств?<br>
+                        Обычно, средства поступают на счет в течение трех рабочих дней с момента получения заявки на вывод. Если же, по истечении трех рабочих дней, Вы не получили денежные средства, уточните статус своей заявки и причину задержки, обратившись на почту: v.turunin@cases4real.com
+                    </p>
+                    <p>
+                        Я не вижу кнопки "Отправить Push-Back", где она?<br>
+                        Skins4Real поддерживает рассылку пушбэков в автоматическом режиме. У Вас больше нет необходимости пытаться отправить пушбэк вручную
+                    </p>
+                    <p>
+                        Наш пользователь сообщил о том, что испытывает затруднения при попытке совершить платеж.<br>
+                        В таком случае, необходимо уточнить, удовлетворяет ли аккаунт пользователя требованиям для совершения обмена в Steam. Если нет, то необходимо предоставить пользователю информацию о подготовке аккаунта к обмену. В противном случае, пожалуйста, сообщите нам на почту о возникшей ошибке, приложив как можно более подробное описание проблемы: v.turunin@cases4real.com
+                    </p>
+                    <p>
+                        Наш пользователь сообщил о том, что совершил обмен, однако денег не получил.<br>
+                        Запросите у пользователя Order ID и проверьте его статус в своем личном кабинете. Название статуса соответствует текущему состоянию платежа. Обратите внимание, что если платеж был неудачным, в детализированном описании платежа доступна причина, по которой обмен не был завершен.
+                    </p>
+                </div>
+            </dd>
+            <dt>Размеры комиссии</dt>
+            <dd>Комиссия, которую Skins4Real взымает с каждого платежа, является статичной и составляет 10% на каждую совершенную покупку через наш сервис. Комиссия на вывод средств из личного кабинета также является статичной и составляет 5% от суммы вывода.
+            </dd>
+            <dt>Вывод средств</dt>
+            <dd>Денежные средства выводятся из вашего личного кабинета в течение трех рабочих дней, после оформления заявки на вывод. Обратите внимание, что при заключении договора, возможно автоматизировать процесс вывода средств на предоставленные вами реквизиты. На данный момент мы поддерживаем вывод средств на QIWI, WebMoney и Yandex.Деньги, в ближайшее время планируем начать поддержку Bitcoin.</dd>
+            <dt>Иные способы вывода средств</dt>
+            <dd>Несмотря на то, что сейчас мы поддерживаем только три платежные системы, мы готовы рассмотреть другой удобный для вас способ получения средств, однако, в таком случае, мы не можем гарантировать низкую комиссию на вывод денежных средств со Skins4Real.</dd>
+            <dt>Уменьшение комиссии</dt>
+            <dd>Несмотря на то, что изначальные размеры комиссии являются статичными, мы готовы обсуждать изменение размера и/или условий ее начисления, в ходе нашего сотрудничества. Мы всегда готовы обсудить индивидуальные условия комиссии с теми, кто является нашим партнером ;)</dd>
+        </dl>
+    </div>
+</article>
+
+<footer class="page-footer">
+    <p class="copyright">© 4real Ltd. Все права защищены. Все упоминания и присутствующие торговые марки зарегистрированы
+        и являются собсбвенностью соответствующих компаний.</p>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('assets/build/js/parallax.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/build/js/script.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/build/js/notify.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('assets/build/js/jquery.mask.min.js') }}"></script>
+
+<script type="text/javascript">
+    var widgetId1, clicked1 = false;
+    var widgetId2, clicked2 = false;
+
+    var verifyCallback1 = function(response) {
+        clicked1 = true;
+    };
+    var verifyCallback2 = function(response) {
+        clicked2 = true;
+    };
+
+    var onloadCallback = function() {
+        // Renders the HTML element with id 'example1' as a reCAPTCHA widget.
+        // The id of the reCAPTCHA widget is assigned to 'widgetId1'.
+        widgetId1 = grecaptcha.render('partner', {
+            'sitekey' : '{{ partner_site_key }}',
+            'callback' : verifyCallback1,
+            'theme' : 'light'
+        });
+
+        widgetId2 = grecaptcha.render('ad', {
+            'sitekey' : '{{ ad_site_key }}',
+            'callback' : verifyCallback2,
+            'theme' : 'light'
+        });
+
+    }
+    $('button.partner').click( function(e){
+        var isValid = $('form.partner_send')[0].checkValidity();
+        if (!isValid && clicked1) {
+            grecaptcha.reset(widgetId1);
+            clicked1 = false;
+        }
+    });
+
+    $('button.ad').click( function(e){
+        var isValid = $('form.ad_send')[0].checkValidity();
+        if (!isValid && clicked2) {
+            grecaptcha.reset(widgetId2);
+            clicked2 = false;
+        }
+    });
+
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+</body>
+</html>

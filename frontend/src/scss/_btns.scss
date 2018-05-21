@@ -1,0 +1,29 @@
+.btn{
+  display: inline-block;
+  border: 0;
+  outline: none;
+  text-decoration: none;
+  padding: 0 25px;
+  line-height: 40px;
+  border-radius: 2px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  &--big{
+    padding: 0 45px;
+    line-height: 60px;
+    font-size: 16px;
+    @media all and (min-width: 1000px){
+      font-size: 19px;
+    }
+    @media screen and (max-width: 400px) {
+      line-height: 20px;
+    }
+  }
+  &--yellow{
+    background: #edb140;
+    color: #fff !important;
+    &:hover{
+      background: #ffb222;
+    }
+  }
+}

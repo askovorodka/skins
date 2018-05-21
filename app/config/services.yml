@@ -1,0 +1,159 @@
+# Learn more about services, parameters and containers at
+# http://symfony.com/doc/current/book/service_container.html
+parameters:
+    app.integration_debit_service.class: AppBundle\Service\IntegrationDebitService
+    app.integration_balance_service.class: AppBundle\Service\IntegrationBalanceService
+    app.integration_reports_service.class: AppBundle\Service\IntegrationReportsService
+    app.deposit_statistics_consumer.class: AppBundle\Consumer\DepositStatisticsConsumer
+    app.deposit_event_listener.class: AppBundle\EventListener\DepositListener
+    app.slack_service.class: AppBundle\Service\SlackService
+    app.captch_service.class: AppBundle\Service\CaptchaService
+
+services:
+    app.captcha_service:
+        class: "%app.captch_service.class%"
+        arguments: []
+
+    app.slack_service:
+        class: "%app.slack_service.class%"
+        arguments: ['@cl_slack.api_client', '@monolog.logger', '%slack_channel_notice%', '%slack_channel_alerts%']
+
+    app.deposit_service:
+        class: AppBundle\Service\Deposit\DepositService
+        arguments: ["@doctrine.orm.entity_manager", "@app.integration_service", "@app.items_price_service", "@logger", "@old_sound_rabbit_mq.pushback_producer", "@app.notification_service", "@app.deposit_items_checker_service", "@app.redis_service"]
+
+    app.deposit_items_checker_service:
+        class: AppBundle\Service\Deposit\DepositItemsCheckerService
+        arguments: ["@app.items_price_service", "@monolog.logger", "@app.redis_service", "@event_dispatcher"]
+
+    app.deposit_repository:
+        class: AppBundle\Repository\DepositRepository
+        factory: 'doctrine:getRepository'
+        arguments: [AppBundle:Deposit]
+
+    app.steam_service:
+        class: AppBundle\Service\SteamService
+        arguments: ["@doctrine.orm.entity_manager", "%bot_url%", "%bot_secret%", "@logger", "@app.redis_service"]
+
+    app.integration_service:
+        class: AppBundle\Service\IntegrationService
+        arguments: ["@doctrine.orm.entity_manager", "@logger"]
+
+    app.inventory_service:
+        class: AppBundle\Service\InventoryService
+        arguments: ["@app.steam_service", "@app.items_price_service", "@app.redis_service", "@logger"]
+
+    app.items_price_service:
+        class: AppBundle\Service\ItemsPriceService
+        arguments: ['%cases_url%', '%dota2_whitelist_url%', '%cases_api_key%', '@app.redis_service', "@logger"]
+
+    app.redis_service:
+        class: AppBundle\Service\RedisService
+        arguments: ["@snc_redis.default"]
+
+    app.stats_service:
+        class: AppBundle\Service\StatisticsService
+        arguments: ["@doctrine.orm.default_entity_manager"]
+
+    app.debit_service:
+        class: AppBundle\Service\DebitService
+        arguments: ["@doctrine.orm.default_entity_manager", "@app.integration_service", "@app.notification_service"]
+
+    app.integration_debit_service:
+        class: "%app.integration_debit_service.class%"
+        arguments: ["@doctrine.orm.default_entity_manager"]
+
+    app.integration_balance_service:
+        class: "%app.integration_balance_service.class%"
+        arguments: ["@doctrine.orm.default_entity_manager"]
+
+    app.integration_reports_service:
+        class: "%app.integration_reports_service.class%"
+        arguments: ["@doctrine.orm.default_entity_manager", "@router"]
+
+    app.notification_service:
+        class: AppBundle\Service\NotificationService
+        arguments: ["@nexy_slack.client", "@mailer"]
+
+    app.locale_listener:
+        class: AppBundle\EventListener\LocaleListener
+        arguments: ['%locale%']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.referrer_listener:
+        class: AppBundle\EventListener\ReferrerListener
+        arguments: ['@logger']
+        tags:
+            - { name: kernel.event_subscriber }
+
+    app.deposit_event_listener:
+        class: "%app.deposit_event_listener.class%"
+        arguments: ["@logger", "@app.redis_service", "@app.deposit_service", '@app.slack_service']
+        tags:
+          - { name: kernel.event_subscriber }
+
+    admin.integration:
+        class: AppBundle\Admin\IntegrationAdmin
+        arguments: [~, AppBundle\Entity\Integration, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: User, label: Integration }
+
+    admin.deposit:
+        class: AppBundle\Admin\DepositAdmin
+        arguments: [~, AppBundle\Entity\Deposit, AppBundle:DepositAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Transactions, label: Deposit }
+
+    admin.user:
+        class: AppBundle\Admin\UserAdmin
+        arguments: [~, AppBundle\Entity\User, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: User, label: User }
+    admin.integration_balance:
+        class: AppBundle\Admin\IntegrationBalance
+        arguments: [~, AppBundle\Entity\IntegrationBalance, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: User, label: Integration Balance }
+
+    admin.debit:
+        class: AppBundle\Admin\IntegrationDebitAdmin
+        arguments: [~, AppBundle\Entity\IntegrationDebit, ~]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: User, label: Integration Debit }
+
+
+    admin.statistics:
+        class: AppBundle\Admin\StatisticsAdmin
+        arguments: [~, ~, AppBundle:StatisticsAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Statistics, label: Statistics }
+
+    pushback_consumer:
+        class: AppBundle\Consumer\SendPushbackConsumer
+        arguments: ["@logger", "@app.deposit_service", "@app.integration_service", "@old_sound_rabbit_mq.pushback_producer"]
+
+    deposit_statistics_consumer:
+        class: "%app.deposit_statistics_consumer.class%"
+        arguments: ["@logger", "@app.deposit_service", "@app.integration_service", "@doctrine.orm.default_entity_manager", "%reports_path%"]
+
+    app.jwt_token_authenticator:
+        class: AppBundle\Security\JwtAuthenticator
+        arguments: ['@doctrine.orm.entity_manager', '@lexik_jwt_authentication.encoder']
+
+    prometheus.render:
+        class: Prometheus\RenderTextFormat
+
+    prometheus.storage.in_memory:
+        class: Prometheus\Storage\InMemory
+
+    prometheus.registry:
+        class: Prometheus\CollectorRegistry
+        arguments: ['@prometheus.storage.in_memory']
+
+    app.tron_reporting:
+        class: AppBundle\Service\TronReportingService
+        arguments:
+          - '@prometheus.registry'
+          - '@prometheus.render'
+          - '@app.deposit_repository'

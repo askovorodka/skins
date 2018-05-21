@@ -1,0 +1,99 @@
+version: "2"
+
+services:
+  mysql:
+    image: 4real/percona
+    restart: always
+    volumes:
+      - ./docker-runtime/mysql:/var/lib/mysql
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=1
+      - MYSQL_DATABASE=${SKINS4REAL_DATABASE_NAME}
+      - MYSQL_USER=${SKINS4REAL_DATABASE_USER}
+      - MYSQL_PASSWORD=${SKINS4REAL_DATABASE_PASSWORD}
+    ports:
+      - "3306:3306"
+
+  php:
+    build:
+      args:
+        - NEWRELIC_LICENSE=486c122e0c44d4076bc5df519406e34629997b99
+      context: docker/php
+    restart: always
+    env_file: .env
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - mysql
+
+  consumer_pushback:
+    build:
+      args:
+        - NEWRELIC_LICENSE=486c122e0c44d4076bc5df519406e34629997b99
+      context: docker/php
+    restart: always
+    env_file: .env
+    volumes_from:
+      - php
+    command: sh -c "php bin/console rabbitmq:consumer -w pushback"
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  casperjs:
+    image: vitr/casperjs
+    restart: always
+    volumes:
+      - .:/var/www/html
+    command: phantomjs /var/www/html/web/assets/build/js/webserver.js
+    ports:
+      - "6161:2121"
+  consumer_statistics:
+    build:
+      args:
+        - NEWRELIC_LICENSE=486c122e0c44d4076bc5df519406e34629997b99
+      context: docker/php
+    restart: always
+    env_file: .env
+    volumes_from:
+      - php
+    command: sh -c "php bin/console rabbitmq:consumer -w depositstatistics "
+    depends_on:
+      - mysql
+      - rabbitmq
+
+  nginx:
+    build:
+      context: docker/nginx
+    restart: always
+    volumes_from:
+      - php
+    ports:
+      - "7000:80"
+
+  redis_default:
+    build:
+      context: docker/redis
+    restart: always
+    command: redis-server --requirepass ${SKINS4REAL_REDIS_PASSWORD} --maxmemory 768Mb
+    volumes:
+      - ./docker-runtime/redis_default:/data
+
+  rabbitmq:
+    build:
+      context: docker/rabbitmq
+    restart: always
+    volumes:
+      - ./docker-runtime/rabbitmq:/var/lib/rabbitmq
+    ports:
+      - "15672:15672"
+
+  netdata:
+    image: titpetric/netdata
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+    ports:
+      - "19999:19999"

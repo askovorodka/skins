@@ -1,0 +1,47 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_host: mysql
+    database_port: null
+    database_name: skins4real
+    database_user: skins4real
+    database_password: password
+    mailer_transport: smtp
+    mailer_user: null
+    mailer_password: null
+    secret: 148ebee82f43f49137c8784f8f3d0c67f5d881b7
+    bot_url: 'https://s4r-1.herokuapp.com/api/v2/'
+    bot_secret: Xlssjwje12Nsdki22;
+    cases_url: 'https://cases4real.com'
+    cases_api_key: HP6gaXrPe!ZsJdk9Gg!!XVM5u6jXW7
+    rabbitmq_host: rabbitmq
+    rabbitmq_port: 5672
+    rabbitmq_user: guest
+    rabbitmq_password: guest
+    rabbitmq_vhost: /
+    slack_token: slacktoken
+    crsf_inscription_inception: somesecret
+    jwt_private_key_path: '%kernel.root_dir%/../var/jwt/private.pem'
+    jwt_public_key_path: '%kernel.root_dir%/../var/jwt/public.pem'
+    jwt_key_pass_phrase: 1234
+    jwt_token_ttl: 36000
+    email.feedback.subject: 'Skins4Real feedback'
+    email.feedback.from: a.shmitz@skins4real.com
+    email.feedback.to: a.shmitz@cases4real.com
+    email.debit.subject: 'Skins4Real new debit request'
+    email.debit.from: a.shmitz@skins4real.com
+    email.debit.to: a.shmitz@cases4real.com
+    casperjs_host: casperjs
+    casperjs_port: 2121
+    reports_path: '%kernel.root_dir%/../web/reports/'
+    redis_dsn_default: 'redis://password@redis_default:6379'
+    slack_api_token: xoxp-26102957478-176992876855-204149769234-1bec5ff009991e03712bcc5681e72652
+    slack_bot_name: Skins4Real
+    slack_bot_icon_emoji: ':rage:'
+    slack_level_alerts: notice
+    dota2_whitelist_url: 'http://207.154.192.94:8080/api/v1/dota2/prices/stable/extended?access_token=29b398a7-d0e7-4f53-881e-e0ff52f20af4'
+    slack_channel: alerts-skins4real
+    slack_channel_alerts: alerts-skins4real
+    slack_channel_notice: notice-skins4real
+    mailer_host: 127.0.0.1
+    redis_dsn_cache: 'redis://password@redis_cache:6379'
+    redis_dsn_session: 'redis://password@redis_session:6379'

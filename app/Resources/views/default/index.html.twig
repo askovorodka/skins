@@ -1,0 +1,125 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container oneColl {% if deposit.status == 'pending' %}hide{% endif %}" id="skinsBlPre">
+        <h2>{{ "preloader_head"|trans|raw }}</h2>
+        <p>{{ "preloader_text"|trans|raw }}</p>
+
+        <div class="animLine">
+            <span></span>
+        </div>
+        <div id="invtLoadErr" class="hide">
+        </div>
+    </div>
+
+    <div class="skins container hide" id="skinsBl">
+        <div class="skins__left">
+            <div class="skins__head">
+                <div class="skins__head__chunk hide-mb">
+                    <div class="skins__head__zag">{{ "your_inventory"|trans }}
+                        <span id="skinsCountUser">0</span></div>
+                </div>
+                <div class="skins__head__chunk hide-mb">
+                    <div class="skins__head__zag ">{{ "cost"|trans }}
+                        <span id="skinsCountSum">0</span></div>
+                </div>
+                <div class="skins__head__chunk hide-ds">
+                    <div class="skins__head__zag">{{ "selected_items_count"|trans }} <span id="countSellItemsMob">0</span></div>
+                </div>
+            </div>
+            <div class="skins__center">
+                <div class="skins__search">
+                    <input type="text" id="skinsSearch">
+                    <label for="skinsSearch">{{ "search_skins"|trans }}</label>
+                    <select name="skinsFilter" id="filterByAppId">
+                        <option value="" />Весь инвентарь
+                        <option value="{{ constant('AppBundle\\DTO\\InventoryItem::APPID_CSGO') }}" />CS:GO
+                        <option value="{{ constant('AppBundle\\DTO\\InventoryItem::APPID_DOTA2') }}" />Dota 2
+                    </select>
+                </div>
+                <div id="skinsItemsWrap" class="skins__items">
+                </div>
+            </div>
+        </div>
+
+        <div class="skins__right">
+            <div class="skins__head hide-mb">
+                <div class="skins__head__zag">{{ "items_selected_to_trade_count"|trans }}<span
+                            id="countSellItems">0</span></div>
+                <div></div>
+            </div>
+            <div class="skins__center hide-mb">
+                <div class="skins__items" id="skinsItemsWrapSell">
+                </div>
+            </div>
+            <div class="skins__foot">
+                <div class="skins__submit disabled" 
+                     id="skinsSubmit"
+                     onclick="skins.submitForm()">{{ "final_value"|trans({'%value%': "<span id=\"js-final-value\">0</span>" })|raw }} <span class="skins__submit__integration_name">{{ deposit.integration.name }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container oneColl {% if deposit.status != 'pending' %}hide{% endif %}" id="skinsBlLast">
+
+        <div class="skinsFinalSuccess skinsFinal hide" id="skinsFinalSuccess">
+            <div class="skinsFinal__icon skinsFinal__icon--success"></div>
+            <p class="zag">{{ "trade_accepted"|trans }}</p>
+
+            <p class="c--gray">{{ "amount"|trans }} <span class="c--white" id="js-deposit-amount"></span><span class="c--white"> {{ deposit.currency|trans }}</span></p>
+            <a href="{{ success_url }}" class="btn btn--yellow btn--big" rel="nofollow">
+                {{ "payment_done_success"|trans }}</a>
+        </div>
+
+        <div class="tSent {% if deposit.status != 'pending' %}hide{% endif %}" id="tSent">
+            <p class="zag">{{ "trade_sent"|trans }}</p>
+            <div class="tSent__counter">
+                <p>{{ "timer"|trans }}</p>
+                <div id="clockdiv" class="clock">
+                    <div class="clock__wrap">
+                        <div id="timerMin"></div>
+                        <div>{{ "min"|trans }}</div>
+                    </div>
+                    <div class="clock__wrap">
+                        <div id="timerSec"></div>
+                        <div>{{ "sec"|trans }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tSent__row">
+                <div>
+                    <p id="tradeHash">{{ deposit.tradeHash }}</p>
+                    <p class="hide-mb">{{ "confirm_trade"|trans }}</p>
+                </div>
+                <a href="{{ confirm_trade_offer_url }}" id="confirmTradeLink" target="_blank"
+                   class="btn btn--yellow btn--big">{{ "accept"|trans }}
+                    <span class="hide-mb"> {{ "trade"|trans }}</span></a>
+            </div>
+            <p class="tSent__mob hide-ds">{{ "confirm_trade"|trans }}</p>
+        </div>
+
+        <div class="skinsFinalFail skinsFinal hide" id="skinsFinalFail">
+            <div class="skinsFinal__icon skinsFinal__icon--fail"></div>
+            <p class="zag" id="skinsFinalFail-message">{{ deposit.status|trans }}</p>
+            <a href="{{ path('try_again', {'_locale': app.request.locale}, true) }}"  class="btn btn--yellow btn--big">{{ "try_again"|trans }}</a>
+        </div>
+
+    </div>
+
+    {% include ':default:faq.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+  <script>
+      var depositId = {{ deposit.id }};
+      var depositStatus = '{{ deposit.status }}';
+      var depositCurrency = '{{ deposit.currency }}';
+      var currency = '{{ deposit.currency|trans }}';
+      var acceptableTranslate = '{{ 'acceptable'|trans }}';
+      var unacceptableTranslate = '{{ 'unacceptable'|trans }}';
+      var csrfToken = '{{ csrf_token( inception_inscription ) }}';
+  </script>
+  {{parent()}}
+{% endblock %}

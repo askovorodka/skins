@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -o allexport
+source .env
+set +o allexport
+
+git init && \
+git remote add origin ${GITHUB_REPO_URL} && \
+git checkout -b ${GITHUB_REPO_BRANCH} && \
+git pull origin ${GITHUB_REPO_BRANCH} && \
+rm -rf .git && \
+
+docker-compose -f production.yml stop php && \
+docker-compose -f production.yml rm -f php && \
+docker-compose -f production.yml up --no-deps -d mariadb && \
+docker-compose -f production.yml up --no-deps -d php && \
+docker-compose -f production.yml run php composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader && \
+docker-compose -f production.yml run --user 82 php php bin/console doctrine:schema:create && \
+docker-compose -f production.yml run --user 82 php php bin/console doctrine:migrations:version --add --all --no-interaction && \
+docker-compose -f production.yml run --user 82 php php bin/console fos:user:create admin admin@skins4real.com ${ADMIN_USER_PASSWORD} --super-admin
+docker-compose -f production.yml stop php

@@ -1,0 +1,93 @@
+trade_url: Your trade url
+inventory: Select items to trade
+confirm_trade: Your secret code (in comments to the trade) 
+payment_done_success: Payment successfully made! You can go back to the shop.
+page_header: Skins4Real
+your_inventory: Your items
+cost: COST
+search_skins: Search by name...
+items_selected_to_trade_count: You give
+final_value: Add %value% to your account
+check_trade_url: Unfortunately, our bot couldn't send you a trade offer. Please, check your trade url, your inventory and profile must be set to public.
+could_not_load_inventory: Couldn't load your inventory. Please, check your trade url, your inventory and profile must be set to public, then reload the page.
+escrow: ESCROW. Couldn't load your inventory. Please, check your trade url, your inventory and profile must be set to public, then reload the page.
+invalid_trade_url: Invalid trade url
+private_inventory: Private inventory, see the page https://steamcommunity.com/id/me/edit/settings and check Inventory=Public in you settings.
+blocked_or_not_available: Couldn't load your inventory. Please, check your trade url, your inventory and profile must be set to public, then reload the page.
+timer: Attention! You should accept trade in
+min: min
+sec: sec
+trade_accepted: Your trade accepted
+amount: credited to your account
+trade_sent: Trade offer sent
+accept: Accept
+trade: trade
+error_bot: Error occured, trade is not accepted!
+error_inventory: Error occured, could not load your inventory.
+try_again: Try again!
+deposit_duplicate: Error! Deposit for this order already created!
+incorrect_sign: Incorrect request!
+payment_failed: Payment failed!
+selected_items_count: Selected
+RUB: RUB
+USD: $
+invalid_trade_url: Invalid trade url.
+deposit: Deposit
+steam_ok: Steam is working
+steam_not_ok: Steam is unstable
+unacceptable_item_submitted: "You are trying to submit unacceptable item"
+acceptable: Item is acceptable
+unacceptable: Item is not acceptable now
+deposit_is_already_handled: Deposit is already hanlded.
+send_offer_error: Unfortunately, our bot couldn't send you a trade offer.
+faq: |
+    <p>Welcome to our platform! Here you can easily and quickly get money for your CS:GO  skins to your account on %integration_name%.
+    <p>Top up your account with CS:GO skins on %integration_name% using the system Skins4Real.</p>
+    <p>The money can be used for new case opening!</p>
+    <br>
+    <p>Frequently asked questions:</p>
+    <br>
+
+    <ul>
+    <li>
+    <p>What fees do you charge?</p>
+    <p class="gray">We do not charge any fees.</p>
+    </li>
+    
+    <li>
+    <p>Why Skins4Real determines such low prices?</p>
+    <p class="gray">Skins4Real is a system of instant skins purchase. At the moment, we buy at the highest price among the similar services. The prices are based on regarding the external markets, not Steam.</p>
+    </li>
+
+    <li>
+    <p>Interested in API for wholesales skins.</p>
+    <p class="gray">Please e-mail us: <a href="mailto:support@cases4real.com">support@cases4real.com</a></p>
+    </li>
+
+    <li>
+    <p>How long does it take to transfer money to my account?</p>
+    <p class="gray">The money will arrive and be available instantly.</p>
+    </li>
+
+    <li>
+    <p>I topped up my account with skins, but the money didn’t arrive within 15 minutes,</p>
+    <p class="gray">Please e-mail us: <a href="mailto:support@cases4real.com">support@cases4real.com</a>. Be sure to submit your top-up number and the screen of the trade with a bot.</p>
+    </li>
+
+    <li>
+    <p>I found a bug on the site.</p>
+    <p class="gray">Please e-mail us: <a href="mailto:support@cases4real.com">support@cases4real.com</a> and you will get a reward!</p>
+    </li>
+    </ul>
+
+preloader_head: Escrow check.
+preloader_text: |
+    <p>You can sell skins only if you have enabled the confirmation of trades on mobile app. After connecting confirmations must pass 14 days, while the function is not activated.</p>
+    <p>Also, your inventory must be public and you must not have a trade-ban.</p>
+    <p>Note: Check does not require any action from you. Our robot will check everything. You can pass the test again in 2 minutes.</p>
+    <p>Download the official Steam app: <a href="http://store.steampowered.com/mobile" target="_blank">link</a></p>
+    <p>Instructions on how to connect the mobile confirmation: <a href="https://support.steampowered.com/kb_article.php?ref=4440-RTUI-9218" target="_blank">link</a></p>
+steam_status_delayed: Steam is delayed
+steam_status_normal: Steam is working
+steam_status_critical: Steam not working
+trade_url.expires: You trade_url has ben expired

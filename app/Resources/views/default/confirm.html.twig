@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container oneColl"> <!-- add this class in second pages - oneColl -->
+        <div class="skinsFinalSuccess skinsFinal {% if deposit.status != 'completed' %}hide{% endif %}">
+            <div class="skinsFinal__icon skinsFinal__icon--success"></div>
+            <p class="zag">{{ "trade_accepted"|trans }}</p>
+
+            <p class="c--gray">{{ "amount"|trans }}<span class="c--white" id="js-deposit-amount"></span></p>
+            <a href="{{ success_url }}" class="btn btn--yellow btn--big" rel="nofollow">
+                {{ "payment_done_success"|trans }}</a>
+        </div>
+        <div class="tSent {% if deposit.status != 'pending' %}hide{% endif %}">
+            <p class="zag">{{ "trade_sent"|trans }}</p>
+
+            <div class="tSent__counter">
+                <p>{{ "timer"|trans }}</p>
+
+                <div id="clockdiv" class="clock">
+                    <div class="clock__wrap">
+                        <div id="timerMin"></div>
+                        <div>{{ "min"|trans }}</div>
+                    </div>
+                    <div class="clock__wrap">
+                        <div id="timerSec"></div>
+                        <div>{{ "sec"|trans }}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="tSent__row">
+                <div>
+                    <p>{{ deposit.tradeHash }}</p>
+
+                    <p class="hide-mb">{{ "confirm_trade"|trans }}</p>
+                </div>
+                <a href="{{ confirm_trade_offer_url }}" target="_blank"
+                   class="btn btn--yellow btn--big">{{ "accept"|trans }}
+                    <span class="hide-mb"> {{ "trade"|trans }}</span></a>
+            </div>
+            <p class="tSent__mob hide-ds">{{ "confirm_trade"|trans }}</p>
+        </div>
+        <div class="skinsFinalFail skinsFinal {% if deposit.status != 'error_bot' %}hide{% endif %}">
+            <div class="skinsFinal__icon skinsFinal__icon--fail"></div>
+            <p class="zag">{{ "trade_not_accepted"|trans }}</p>
+            <a href="{{ path('try_again', {'depositId': deposit.getId}) }}" class="btn btn--yellow btn--big">{{ "payment_failed"|trans }}</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        var depositId = {{ deposit.getId }};
+    </script>
+    {{ parent() }}
+    <script>
+        function worker() {
+            $.ajax({
+                url: '{{ path('check_deposit', {'depositId': deposit.getId}) }}',
+                complete: function (data) {
+                    if (data.responseJSON.action == 'show_success') {
+                        $('#js-deposit-amount').text(data.responseJSON.amount);
+                        $('.tSent').addClass('hide');
+                        $('.skinsFinalSuccess').removeClass('hide');
+                    } else if (data.responseJSON.action == 'show_fail') {
+                        $('.tSent').addClass('hide');
+                        $('.skinsFinalFail').removeClass('hide');
+                    } else if (data.responseJSON.action == 'show_pending') {
+                        setTimeout(worker, 15000);
+                    }
+                }
+            });
+        }
+        worker();
+    </script>
+{% endblock %}

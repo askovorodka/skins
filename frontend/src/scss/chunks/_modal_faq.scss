@@ -1,0 +1,27 @@
+.modal--faq{
+  p.gray{
+    color: #828299;
+  }
+  a{
+    color: #edb140;
+  }
+  ul,li{
+    margin: 0;
+  }
+  li{
+    position: relative;
+    padding-left: 20px;
+    margin-bottom: 20px;
+    &:before{
+      display: block;
+      content: '';
+      background-color: #34b262;
+      width: 7px;
+      height: 7px;
+      border-radius: 7px;
+      position: absolute;
+      left: 0;
+      top: 6px;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.clock{
+  display: flex;
+  text-align: center;
+  margin-left: 10px;
+  position: relative;
+  &:before,
+  &:after{
+    display: block;
+    content: '';
+    width: 2px;
+    height: 2px;
+    background: #4b505e;
+    position: absolute;
+    left: calc(50% - 1px);
+  }
+  &:before{
+    top: 12px;
+  }
+  &:after{
+    top: 17px;
+  }
+  &__wrap{
+    margin: 0 6px;
+    >div:first-child{
+      width: 45px;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 2px;
+      border-bottom: 1px solid #2f3138;
+      background: #13151c;
+      font-size: 15px;
+      color: #edb140;
+    }
+  }
+}

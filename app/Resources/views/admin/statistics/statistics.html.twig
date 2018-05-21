@@ -1,0 +1,46 @@
+{% extends base_template %}
+
+{% block content %}
+    <div>
+    <form method="get">
+        {{ form_widget(form) }}
+        <button class="btn btn-success" type="submit">Filter</button>
+    </form>
+
+
+
+    </div>
+{% if pagination.getTotalItemCount == 0%}
+    <div>No results</div>
+{% else %}
+    <table class="table table-bordered table-striped sonata-ba-list">
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>Date</th>
+            <th>Currency</th>
+            <th>Unique users</th>
+            <th>Credited</th>
+            <th>Items value</th>
+            <th>Profit</th>
+        </tr>
+
+        {# table body #}
+        {% for entry in pagination %}
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td class="sonata-ba-list-field">{{ entry.date }}</td>
+                <td class="sonata-ba-list-field">{{ entry.currency }}</td>
+                <td class="sonata-ba-list-field">{{ entry.unique_users }}</td>
+                <td class="sonata-ba-list-field">{{ entry.sum_value }}</td>
+                <td class="sonata-ba-list-field">{{ entry.sum_no_tax_value }}</td>
+                <td class="sonata-ba-list-field">{{ entry.profit }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    {# display navigation #}
+    <div class="text-center">
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+{% endif %}
+{% endblock %}

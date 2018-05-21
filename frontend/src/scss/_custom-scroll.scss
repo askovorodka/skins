@@ -1,0 +1,66 @@
+.custom-scroll_container {
+  overflow: hidden !important;
+  position: relative;
+  max-height: 100%;
+}
+
+.custom-scroll_inner {
+  will-change: transform; 
+  overflow-y: scroll;
+  height: 1000px;
+  *position: absolute; /* ie7 fix */
+  *left: 0;
+  *right: 0;
+}
+.custom-scroll_inner::-webkit-scrollbar { width: 0; height: 0; }
+.custom-scroll_inner{ -ms-overflow-style: none; }
+
+.custom-scroll_bar-y,
+.custom-scroll_bar-x{
+  cursor: pointer;
+  position: absolute;
+  z-index: 1;
+  user-select: none;
+}
+
+.custom-scroll_bar-y span,
+.custom-scroll_bar-x span {
+  border-radius: 1px;
+  background: #888;
+  opacity: .4;
+  transition: opacity .2s;
+}
+.custom-scroll_bar-y{
+  top: 0;
+  right: 0px;
+  width: 18px;
+}
+.custom-scroll_bar-y span{
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 8px;
+  width: 2px;
+  height: 100%;
+}
+.custom-scroll_bar-x {
+  left: 0;
+  bottom: 1px;
+  height: 8px;
+}
+
+.custom-scroll_bar-y:hover span,
+.custom-scroll_bar-x:hover span {
+  opacity: .7;
+}
+.custom-scroll_bar-y:active span,
+.custom-scroll_bar-x:active span {
+  opacity: 1;
+}
+
+.custom-scroll_hidden-y > .custom-scroll_bar-y,
+.custom-scroll_hidden-x > .custom-scroll_bar-x {
+ opacity: 0;
+ visibility: hidden;
+ transition: opacity .2s, visibility step-end .3s;
+}
